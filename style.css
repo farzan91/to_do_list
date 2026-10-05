@@ -1,0 +1,94 @@
+@font-face {
+    font-family: vazir;
+    src: url(./Vazir.ttf);
+}
+body{
+    background-color: rgb(240, 243, 255);
+    padding: 10px;
+    font-family: vazir;
+}
+main{
+    background-color: white;
+    padding: 20px;
+    border-radius: 24px;
+}
+form{
+    display: grid;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+main input{
+    border-radius: 8px;
+    border: 1px solid rgb(160, 159, 159);
+    height: 20px;
+    width: 100%;
+    padding: 8px;
+    justify-self: center;
+    font-family: vazir;
+}
+main input::placeholder{
+    text-align: center;
+    font-family: vazir;
+}
+main button{
+    background-color: black;
+    color: white;
+    height: 36px;
+    width: 300px;
+    padding: 8px;
+    text-align: center;
+    border-radius: 16px;
+    font-family: vazir;
+    justify-self: center;
+    line-height: 18px;
+    box-shadow: 0px 0px 20px 1px rgb(151, 151, 153);
+    transition: transform 300ms ease-in-out;
+}
+main button:hover{
+    transform: translateY(-3px);
+    cursor: pointer;
+}
+main p{
+    text-align: center;
+    font-weight: 300;
+    color: rgb(116, 116, 116);
+}
+.tabel{
+    display: flex;
+    justify-content: center;
+}
+table{
+    margin: 20px;
+}
+th,td{
+    border-bottom:1px solid #fff3f5;
+    padding: 10px 20px;
+    width: 40vw;
+    border-top: 1px solid rgba(192, 192, 192, 0.411);
+    text-align: center;
+}
+tr:last-child{
+    border-bottom: none;
+}
+tr:nth-child(even){
+    background-color: rgb(240, 243, 255);
+}
+tr:hover{
+    background-color: rgb(224, 231, 255);
+}
+button:active{
+    transform: scale(0.95);
+}
+thead tr:hover{
+    background-color: initial;
+}
+
+.red{
+    background-color: rgba(255, 64, 64, 0.596);
+    width: 60px;
+    height: auto;
+    border-radius: 100%;
+    border: none;
+    box-shadow: none;
+}

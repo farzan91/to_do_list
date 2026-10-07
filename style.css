@@ -31,11 +31,11 @@ main input::placeholder{
     text-align: center;
     font-family: vazir;
 }
-/* .time{
+.time{
     display: flex;
     flex-direction: row-reverse;
     gap: 10px;
-} */
+}
 .time input{
     width: 50px;
 }
@@ -175,14 +175,13 @@ table{
 }
 
 @media (max-width: 480px){
-
     h1{
         font-size: 1.3rem;
     }
 
     .time{
-        display: grid;
-        grid-template-columns: repeat(2,1fr);
+        display: flex;
+        flex-direction: column;
         gap: 10px;
     }
 

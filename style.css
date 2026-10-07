@@ -2,105 +2,54 @@
     font-family: vazir;
     src: url(./Vazir.ttf);
 }
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body{
-    background-color: rgb(240, 243, 255);
+    background-color: rgb(240,243,255);
     padding: 10px;
     font-family: vazir;
 }
+
 main{
     background-color: white;
     padding: 20px;
     border-radius: 24px;
+    max-width: 1100px;
+    margin: auto;
 }
+
+h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 form{
     display: grid;
     gap: 20px;
-    justify-content: center;
-    align-items: center;
-}
-main input{
-    border-radius: 8px;
-    border: 1px solid rgb(160, 159, 159);
-    height: 20px;
-    width: 100%;
-    padding: 8px;
-    justify-self: center;
-    font-family: vazir;
-}
-main input::placeholder{
-    text-align: center;
-    font-family: vazir;
-}
-.time{
-    display: flex;
-    flex-direction: row-reverse;
-    gap: 10px;
-}
-.time input{
-    width: 50px;
-}
-main button{
-    background-color: black;
-    color: white;
-    height: 36px;
-    width: 300px;
-    padding: 8px;
-    text-align: center;
-    border-radius: 16px;
-    font-family: vazir;
-    justify-self: center;
-    line-height: 18px;
-    box-shadow: 0px 0px 20px 1px rgb(151, 151, 153);
-    transition: transform 300ms ease-in-out;
-}
-main button:hover{
-    transform: translateY(-3px);
-    cursor: pointer;
-}
-main p{
-    text-align: center;
-    font-weight: 300;
-    color: rgb(116, 116, 116);
-}
-.tabel{
-    display: flex;
-    justify-content: center;
-}
-table{
-    margin: 20px;
-}
-th,td{
-    border-bottom:1px solid #fff3f5;
-    padding: 10px 20px;
-    width: 40vw;
-    border-top: 1px solid rgba(192, 192, 192, 0.411);
-    text-align: center;
-}
-tr:last-child{
-    border-bottom: none;
-}
-tr:nth-child(even){
-    background-color: rgb(240, 243, 255);
-}
-tr:hover{
-    background-color: rgb(224, 231, 255);
-}
-button:active{
-    transform: scale(0.95);
-}
-thead tr:hover{
-    background-color: initial;
 }
 
-.red{
-    background-color: rgba(255, 64, 64, 0.596);
-    width: 60px;
-    height: auto;
-    border-radius: 100%;
-    border: none;
-    box-shadow: none;
+main input{
+    border-radius: 8px;
+    border: 1px solid rgb(160,159,159);
+    height: 40px;
+    width: 100%;
+    padding: 8px;
+    font-family: vazir;
 }
-/* ---------- Responsive ---------- */
+
+main input::placeholder{
+    text-align: center;
+}
+
+#title{
+    max-width: 500px;
+    justify-self: center;
+}
 
 .time{
     display: flex;
@@ -110,34 +59,90 @@ thead tr:hover{
 }
 
 .time input{
-    width: 70px;
-}
-
-table{
-    width: 100%;
-    border-collapse: collapse;
+    width: 80px;
 }
 
 main button{
+    background-color: black;
+    color: white;
+    height: 40px;
     width: 100%;
     max-width: 300px;
+    border: none;
+    border-radius: 16px;
+    font-family: vazir;
+    justify-self: center;
+    box-shadow: 0 0 20px 1px rgb(151,151,153);
+    transition: 300ms;
 }
 
-#title{
-    width: 100%;
-    max-width: 500px;
+main button:hover{
+    transform: translateY(-3px);
+    cursor: pointer;
 }
+
+button:active{
+    transform: scale(.95);
+}
+
+main p{
+    text-align: center;
+    font-weight: 300;
+    color: rgb(116,116,116);
+    margin-top: 15px;
+}
+
+/* جدول */
 
 .tabel{
     width: 100%;
     overflow-x: auto;
+    margin-top: 20px;
 }
 
 table{
-    min-width: 600px;
+    width: 100%;
+    min-width: 550px;
+    border-collapse: collapse;
 }
 
-@media (max-width: 768px){
+th,
+td{
+    border-top: 1px solid rgba(192,192,192,.4);
+    border-bottom: 1px solid rgba(192,192,192,.2);
+
+    padding: 10px;
+
+    text-align: center;
+
+    white-space: nowrap;
+
+    font-size: clamp(10px,1.3vw,15px);
+}
+
+tr:nth-child(even){
+    background-color: rgb(240,243,255);
+}
+
+tr:hover{
+    background-color: rgb(224,231,255);
+}
+
+thead tr:hover{
+    background-color: white;
+}
+
+.red{
+    background-color: rgba(255,64,64,.7);
+    width: 60px;
+    border-radius: 999px;
+    border: none;
+    box-shadow: none;
+}
+
+/* تبلت */
+
+@media (max-width:768px){
 
     body{
         padding: 5px;
@@ -145,28 +150,20 @@ table{
 
     main{
         padding: 15px;
-        border-radius: 16px;
     }
 
     h1{
-        text-align: center;
-        font-size: 1.6rem;
-    }
-
-    .time{
-        gap: 8px;
+        font-size: 1.5rem;
     }
 
     .time input{
-        width: 60px;
-        padding: 6px;
+        width: 70px;
     }
 
     th,
     td{
-        padding: 8px;
-        width: auto;
-        font-size: 14px;
+        font-size: 12px;
+        padding: 8px 6px;
     }
 
     .red{
@@ -174,37 +171,45 @@ table{
     }
 }
 
-@media (max-width: 480px){
+/* موبایل */
+
+@media (max-width:480px){
+
     h1{
-        font-size: 1.3rem;
+        font-size: 1.25rem;
     }
 
     .time{
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
     }
 
     .time input{
         width: 100%;
-        box-sizing: border-box;
     }
 
     main button{
-        width: 100%;
+        max-width: none;
+    }
+
+    table{
+        min-width: 500px;
     }
 
     th,
     td{
-        font-size: 12px;
-        padding: 6px;
-    }
-
-    main p{
-        font-size: 13px;
+        font-size: 10px;
+        padding: 5px 3px;
+        white-space: nowrap;
     }
 
     .red{
-        width: 40px;
+        width: 42px;
+        font-size: 10px;
+    }
+
+    main p{
+        font-size: 12px;
     }
 }

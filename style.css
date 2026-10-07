@@ -100,3 +100,112 @@ thead tr:hover{
     border: none;
     box-shadow: none;
 }
+/* ---------- Responsive ---------- */
+
+.time{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.time input{
+    width: 70px;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+main button{
+    width: 100%;
+    max-width: 300px;
+}
+
+#title{
+    width: 100%;
+    max-width: 500px;
+}
+
+.tabel{
+    width: 100%;
+    overflow-x: auto;
+}
+
+table{
+    min-width: 600px;
+}
+
+@media (max-width: 768px){
+
+    body{
+        padding: 5px;
+    }
+
+    main{
+        padding: 15px;
+        border-radius: 16px;
+    }
+
+    h1{
+        text-align: center;
+        font-size: 1.6rem;
+    }
+
+    .time{
+        gap: 8px;
+    }
+
+    .time input{
+        width: 60px;
+        padding: 6px;
+    }
+
+    th,
+    td{
+        padding: 8px;
+        width: auto;
+        font-size: 14px;
+    }
+
+    .red{
+        width: 50px;
+    }
+}
+
+@media (max-width: 480px){
+
+    h1{
+        font-size: 1.3rem;
+    }
+
+    .time{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 10px;
+    }
+
+    .time input{
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    main button{
+        width: 100%;
+    }
+
+    th,
+    td{
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    main p{
+        font-size: 13px;
+    }
+
+    .red{
+        width: 40px;
+    }
+}

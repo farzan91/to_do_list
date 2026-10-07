@@ -11,7 +11,19 @@ const yearInput = document.querySelector("#year");
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 /* -------------------- */
-/*  Jalali <-> Gregorian */
+/* تبدیل اعداد فارسی به انگلیسی */
+/* -------------------- */
+
+function toEnglishNumber(str) {
+
+    return String(str)
+        .replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+        .replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+
+}
+
+/* -------------------- */
+/* Jalali -> Gregorian */
 /* -------------------- */
 
 function div(a, b) {
@@ -19,6 +31,10 @@ function div(a, b) {
 }
 
 function jalaliToGregorian(jy, jm, jd) {
+
+    jy = Number(toEnglishNumber(jy));
+    jm = Number(toEnglishNumber(jm));
+    jd = Number(toEnglishNumber(jd));
 
     jy += 1595;
 
@@ -36,20 +52,24 @@ function jalaliToGregorian(jy, jm, jd) {
     days %= 146097;
 
     if (days > 36524) {
+
         gy += 100 * div(--days, 36524);
         days %= 36524;
 
         if (days >= 365) {
             days++;
         }
+
     }
 
     gy += 4 * div(days, 1461);
     days %= 1461;
 
     if (days > 365) {
+
         gy += div(days - 1, 365);
         days = (days - 1) % 365;
+
     }
 
     let gd = days + 1;
@@ -75,8 +95,10 @@ function jalaliToGregorian(jy, jm, jd) {
     let gm = 0;
 
     while (gm < 12 && gd > sal_a[gm + 1]) {
+
         gm++;
         gd -= sal_a[gm];
+
     }
 
     return {
@@ -86,81 +108,23 @@ function jalaliToGregorian(jy, jm, jd) {
     };
 }
 
-function gregorianToJalali(gy, gm, gd) {
-
-    const g_d_m = [
-        0,
-        31,
-        59,
-        90,
-        120,
-        151,
-        181,
-        212,
-        243,
-        273,
-        304,
-        334
-    ];
-
-    let jy;
-
-    if (gy > 1600) {
-        jy = 979;
-        gy -= 1600;
-    } else {
-        jy = 0;
-        gy -= 621;
-    }
-
-    const gy2 = gm > 2 ? gy + 1 : gy;
-
-    let days =
-        (365 * gy) +
-        div(gy2 + 3, 4) -
-        div(gy2 + 99, 100) +
-        div(gy2 + 399, 400) -
-        80 +
-        gd +
-        g_d_m[gm - 1];
-
-    jy += 33 * div(days, 12053);
-    days %= 12053;
-
-    jy += 4 * div(days, 1461);
-    days %= 1461;
-
-    if (days > 365) {
-        jy += div(days - 1, 365);
-        days = (days - 1) % 365;
-    }
-
-    let jm;
-    let jd;
-
-    if (days < 186) {
-        jm = 1 + div(days, 31);
-        jd = 1 + (days % 31);
-    } else {
-        jm = 7 + div(days - 186, 30);
-        jd = 1 + ((days - 186) % 30);
-    }
-
-    return { jy, jm, jd };
-}
-
 /* -------------------- */
 
 function saveTasks() {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    localStorage.setItem(
+        "tasks",
+        JSON.stringify(tasks)
+    );
+
 }
 
 function getTaskTime(task) {
 
     const g = jalaliToGregorian(
-        Number(task.year),
-        Number(task.month),
-        Number(task.day)
+        task.year,
+        task.month,
+        task.day
     );
 
     return new Date(
@@ -170,6 +134,7 @@ function getTaskTime(task) {
         Number(task.hour),
         Number(task.minut)
     ).getTime();
+
 }
 
 function sortTasks() {
@@ -178,12 +143,16 @@ function sortTasks() {
 
     tasks.sort((a, b) => {
 
-        const diffA = Math.abs(getTaskTime(a) - now);
-        const diffB = Math.abs(getTaskTime(b) - now);
+        const diffA =
+            Math.abs(getTaskTime(a) - now);
+
+        const diffB =
+            Math.abs(getTaskTime(b) - now);
 
         return diffA - diffB;
 
     });
+
 }
 
 function removeTask(index) {
@@ -193,6 +162,7 @@ function removeTask(index) {
     saveTasks();
 
     render();
+
 }
 
 function render() {
@@ -222,24 +192,35 @@ function render() {
 
         table.innerHTML += `
             <tr>
+
                 <td>${task.title}</td>
 
                 <td>
                     ${task.year}/${task.month}/${task.day}
                 </td>
 
-                <td>${String(task.minut).padStart(2, "0")} : ${String(task.hour).padStart(2, "0")}</td>
+                <td>
+                    ${String(task.minut).padStart(2, "0")}
+                    :
+                    ${String(task.hour).padStart(2, "0")}
+                </td>
 
                 <td>${status}</td>
 
                 <td>
-                    <button onclick="removeTask(${index})" class="red">
+                    <button
+                        class="red"
+                        onclick="removeTask(${index})"
+                    >
                         حذف
                     </button>
                 </td>
+
             </tr>
         `;
+
     });
+
 }
 
 window.removeTask = removeTask;
@@ -248,17 +229,50 @@ form.addEventListener("submit", (e) => {
 
     e.preventDefault();
 
-    const title = titleInput.value.trim();
+    const title =
+        titleInput.value.trim();
 
     if (!title) return;
 
+    const minut =
+        Number(toEnglishNumber(minutInput.value));
+
+    const hour =
+        Number(toEnglishNumber(hourInput.value));
+
+    const day =
+        Number(toEnglishNumber(dayInput.value));
+
+    const month =
+        Number(toEnglishNumber(monthInput.value));
+
+    const year =
+        Number(toEnglishNumber(yearInput.value));
+
+    if (
+        isNaN(minut) ||
+        isNaN(hour) ||
+        isNaN(day) ||
+        isNaN(month) ||
+        isNaN(year)
+    ) {
+
+        alert("لطفاً تاریخ و ساعت را صحیح وارد کنید");
+
+        return;
+
+    }
+
     tasks.push({
-        title: title,
-        minut: Number(minutInput.value),
-        hour: Number(hourInput.value),
-        day: Number(dayInput.value),
-        month: Number(monthInput.value),
-        year: Number(yearInput.value)
+
+        title,
+
+        minut,
+        hour,
+        day,
+        month,
+        year
+
     });
 
     saveTasks();
@@ -266,9 +280,15 @@ form.addEventListener("submit", (e) => {
     render();
 
     form.reset();
+
 });
 
 render();
 
-/* هر دقیقه وضعیت و ترتیب را به‌روزرسانی می‌کند */
-setInterval(render, 60000);
+/* بروزرسانی هر دقیقه */
+
+setInterval(() => {
+
+    render();
+
+}, 60000);
